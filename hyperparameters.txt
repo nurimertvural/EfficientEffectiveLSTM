@@ -1,0 +1,101 @@
+--- HYPERPARAMETERS
+
+DEFINITIONS:
+
+Hidden: Dimension of the hidden state
+LRate:  Learing Rate
+P:      Initial value of the state covariance matrix
+Rinit:  Initial value of the measurement noise r_t
+Rlast:  Final value of the measurement noise r_t
+Qinit:  Initial value of the process noise q_t
+Qlast:  Final value of the process noise q_t
+Bias:   Initial value of the bias weights
+Backward: The number of steps that LSTMs are rolled back for bakpropagation
+ChiMin: Upper bound for nonlinear terms
+
+
+IMPLEMANTATION DETAILS:
+
+* In Alg2, we add additional 0.5 to the measurement noise for numerical stability.
+* In the experiments of SGD, Adam, RMSprrop, DEKF and EKF, we initialize the
+  bias weight of the forget gate with the value of 'Bias', the bias weights of the
+  input and output gates with the negative of 'Bias'.
+* In Alg2, we initialize the bias weight of the forget and inout gates with the value
+  of 'Bias'.
+
+
+
+HYPERPARAMETERS USED IN THE EXPERIMENTS:
+
+REAL DATA BENCHMARK:
+
+*****
+Dataset: elevators, Hidden: 12, Backward: 10
+SGD -> LRate: 0.35, Bias: 0.5
+RMSprop -> LRate: 0.005, Bias: 0.5
+Adam ->  LRate: 0.005, Bias: 0.5
+DEKF -> P: 100, Rinit: 50, Rlast: 3, Qinit: 1e-2, Qlast: 1e-6, Bias: 0.5
+EKF ->  P: 100, Rinit: 50, Rlast: 3, Qinit: 1e-2, Qlast: 1e-6, Bias: 0.5
+Alg2 -> P: 10, Qinit: 1e-4, Qlast: 1e-8, Bias: 5, ChiMin: 1e-2
+
+*****
+Dataset: kin8nm, Hidden: 16, Backward: 10
+SGD -> LRate: 0.3, Bias: 0.5
+RMSprop -> LRate: 0.004, Bias: 0.5
+Adam ->  LRate: 0.003, Bias: 0.5
+DEKF -> P: 100, Rinit: 30, Rlast: 3, Qinit: 1e-2, Qlast: 1e-6, Bias: 0.5
+EKF ->  P: 100, Rinit: 30, Rlast: 3, Qinit: 1e-2, Qlast: 1e-6, Bias: 0.5
+Alg2 -> P: 10, Qinit: 1e-4, Qlast: 1e-8, Bias: 0.5, ChiMin: 1e-2
+
+*****
+Dataset: kin32fm, Hidden: 12 Backward: 20
+SGD -> LRate: 0.5, Bias: 0.5
+RMSprop -> LRate: 0.002, Bias: 1.5
+Adam ->  LRate: 0.001, Bias: 1.5
+DEKF -> P: 100, Rinit: 30, Rlast: 3, Qinit: 1e-2, Qlast: 1e-6, Bias: 1.5
+EKF ->  P: 100, Rinit: 30, Rlast: 3, Qinit: 1e-2, Qlast: 1e-6, Bias: 1.5
+Alg2 -> P: 0.5, Qinit: 1e-8, Qlast: 1e-8, Bias: 5, ChiMin: 1e-2
+
+
+*****
+Dataset: puma8nm, Hidden: 16, Backward: 10
+SGD -> LRate: 0.4, Bias: 0.5
+RMSprop -> LRate: 0.01, Bias: 0.5
+Adam ->  LRate: 0.009, Bias: 0.5
+DEKF -> P: 100, Rinit: 30, Rlast: 3, Qinit: 1e-2, Qlast: 1e-6, Bias: 0.5
+EKF ->  P: 100, Rinit: 30, Rlast: 3, Qinit: 1e-2, Qlast: 1e-6, Bias: 0.5
+Alg2 -> P: 10, Qinit: 1e-4, Qlast: 1e-8, Bias: 0.5, ChiMin: 1e-2
+
+
+*****
+Dataset: puma8nh, Hidden: 16, Backward: 10
+SGD -> LRate: 0.25, Bias: 0.5
+RMSprop -> LRate: 0.006, Bias: 0.5
+Adam ->  LRate: 0.006, Bias: 0.5
+DEKF -> P: 100, Rinit: 20, Rlast: 3, Qinit: 1e-3, Qlast: 1e-6, Bias: 0.5
+EKF ->  P: 100, Rinit: 20, Rlast: 3, Qinit: 1e-3, Qlast: 1e-6, Bias: 0.5
+Alg2 -> P: 10, Qinit: 1e-4, Qlast: 1e-8, Bias: 0.5, ChiMin: 1e-2
+
+*****
+Dataset: puma32fm, Hidden: 12 Backward: 20
+SGD -> LRate: 0.35, Bias: 0.5
+RMSprop -> LRate: 0.004, Bias: 1.5
+Adam ->  LRate: 0.003, Bias: 1.5
+DEKF -> P: 100, Rinit: 20, Rlast: 3, Qinit: 1e-3, Qlast: 1e-6, Bias: 1.5
+EKF ->  P: 100, Rinit: 20, Rlast: 3, Qinit: 1e-3, Qlast: 1e-6, Bias: 1.5
+Alg2 -> P: 0.5, Qinit: 1e-8, Qlast: 1e-8, Bias: 5, ChiMin: 1e-2
+
+
+BINARY ADDITION:
+
+For all data, we use the following hyperparameters:
+
+Backward: 10, Bias: 0.5
+RMSprop -> LRate: 0.02
+DEKF -> P: 100, Rinit: 3, Rlast: 3, Qinit: 1e-3, Qlast: 1e-6
+EKF ->  P: 100, Rinit: 3, Rlast: 3, Qinit: 1e-3, Qlast: 1e-6
+Alg2 -> P: 10, Qinit: 1e-7, Qlast: 1e-7, ChiMin: 1e-2
+
+
+
+
