@@ -9,5 +9,5 @@ Required packages:
 
 The software is written in MATLAB. The software consists of three parts:
 * **LSTM**: One-layered LSTM module
-* **Optimizer**: Optimizer class-- includes SGD, RMSprop, Adam, DEKF, and EKF.
-* **LSTM_IEKF**: Implementation of the proposed algorithm.
+* **Optimizer**: Optimizer class - includes SGD, RMSprop, Adam, DEKF, and EKF.
+* **LSTM_IEKF**: Implementation of the proposed algorithm (including one-layered LSTM module).
