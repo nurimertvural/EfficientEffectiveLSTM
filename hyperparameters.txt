@@ -2,26 +2,25 @@
 
 DEFINITIONS:
 
-Hidden: Dimension of the hidden state
-LRate:  Learing Rate
-P:      Initial value of the state covariance matrix
-Rinit:  Initial value of the measurement noise r_t
-Rlast:  Final value of the measurement noise r_t
-Qinit:  Initial value of the process noise q_t
-Qlast:  Final value of the process noise q_t
-Bias:   Initial value of the bias weights
-Backward: The number of steps that LSTMs are rolled back for bakpropagation
-ChiMin: Upper bound for nonlinear terms
+Hidden:   Dimension of the hidden state
+LRate:    Learning Rate
+P:        Initial value of the state covariance matrix
+Rinit:    Initial value of the measurement noise r_t
+Rlast:    Final value of the measurement noise r_t
+Qinit:    Initial value of the process noise q_t
+Qlast:    Final value of the process noise q_t
+Bias:     Initial value of the bias weights
+Backward: The number of timesteps to which to apply BPTT
+ChiMin:   Upper bound for nonlinear terms
 
 
 IMPLEMANTATION DETAILS:
 
 * In Alg2, we add additional 0.5 to the measurement noise for numerical stability.
-* In the experiments of SGD, Adam, RMSprrop, DEKF and EKF, we initialize the
-  bias weight of the forget gate with the value of 'Bias', the bias weights of the
-  input and output gates with the negative of 'Bias'.
-* In Alg2, we initialize the bias weight of the forget and inout gates with the value
-  of 'Bias'.
+* In the experiments of SGD, Adam, RMSprop, DEKF and EKF, we initialize the
+  bias weight of the forget gate with 'Bias', the bias weights of the
+  input and output gates with negative 'Bias'.
+* In Alg2, we initialize the bias weight of the forget and input gates with'Bias'.
 
 
 
@@ -88,7 +87,7 @@ Alg2 -> P: 0.5, Qinit: 1e-8, Qlast: 1e-8, Bias: 5, ChiMin: 1e-2
 
 BINARY ADDITION:
 
-For all data, we use the following hyperparameters:
+In this part, we use the following hyperparameters:
 
 Backward: 10, Bias: 0.5
 RMSprop -> LRate: 0.02
