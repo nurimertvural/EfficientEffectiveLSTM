@@ -1,6 +1,6 @@
 # An Efficient and Effective Second-Order Training Algorithm For LSTM-based Adaptive Learning
 
-This software accompanies the paper Vural, N.M., Ergut, S., Kozat S.S. (2020), "An Efficient and Effective Second-Order Training Algorithm For LSTM-based Adaptive Learning", IEEE Transaction on Signal Processing(under review). It is intended to share experiment codes for future works. For the details of the experiment, please see the paper. 
+This software accompanies the paper Vural, N.M., Ergut, S., Kozat S.S. (2020), "An Efficient and Effective Second-Order Training Algorithm For LSTM-based Adaptive Learning", IEEE Transaction on Signal Processing(under review). It is intended to share the experiment codes for future works. For the details of the experiment, please see the paper. 
 
 Hyperparameters of the compared algorithms can be found in **hyperparameters.txt**. Datasets can be found in **../data** files.
 
