@@ -30,59 +30,59 @@ REAL DATA BENCHMARK:
 
 *****
 Dataset: elevators, Hidden: 12, Backward: 10
-SGD -> LRate: 0.35, Bias: 0.5
-RMSprop -> LRate: 0.005, Bias: 0.5
-Adam ->  LRate: 0.005, Bias: 0.5
-DEKF -> P: 100, Rinit: 50, Rlast: 3, Qinit: 1e-2, Qlast: 1e-6, Bias: 0.5
-EKF ->  P: 100, Rinit: 50, Rlast: 3, Qinit: 1e-2, Qlast: 1e-6, Bias: 0.5
+SGD -> LRate: 0.3, Bias: 0.5
+RMSprop -> LRate: 0.006, Bias: 0.5
+Adam ->  LRate: 0.003, Bias: 0.5
+DEKF -> P: 100, Rinit: 10, Rlast: 3, Qinit: 1e-4, Qlast: 1e-6, Bias: 0.5
+EKF ->  P: 100, Rinit: 10, Rlast: 3, Qinit: 1e-4, Qlast: 1e-6, Bias: 0.5
 Alg2 -> P: 10, Qinit: 1e-4, Qlast: 1e-8, Bias: 5, ChiMin: 1e-2
 
 *****
 Dataset: kin8nm, Hidden: 16, Backward: 10
-SGD -> LRate: 0.3, Bias: 0.5
-RMSprop -> LRate: 0.004, Bias: 0.5
-Adam ->  LRate: 0.003, Bias: 0.5
-DEKF -> P: 100, Rinit: 30, Rlast: 3, Qinit: 1e-2, Qlast: 1e-6, Bias: 0.5
-EKF ->  P: 100, Rinit: 30, Rlast: 3, Qinit: 1e-2, Qlast: 1e-6, Bias: 0.5
-Alg2 -> P: 10, Qinit: 1e-4, Qlast: 1e-8, Bias: 0.5, ChiMin: 1e-2
+SGD -> LRate: 0.2, Bias: 0.5
+RMSprop -> LRate: 0.009, Bias: 0.5
+Adam ->  LRate: 0.004, Bias: 0.5
+DEKF -> P: 100, Rinit: 10, Rlast: 3, Qinit: 1e-4, Qlast: 1e-6, Bias: 0.5
+EKF ->  P: 100, Rinit: 10, Rlast: 3, Qinit: 1e-4, Qlast: 1e-6, Bias: 0.5
+Alg2 -> P: 10, Qinit: 1e-7, Qlast: 1e-8, Bias: 0.5, ChiMin: 1e-2
 
 *****
-Dataset: kin32fm, Hidden: 12 Backward: 20
-SGD -> LRate: 0.5, Bias: 0.5
-RMSprop -> LRate: 0.002, Bias: 1.5
-Adam ->  LRate: 0.001, Bias: 1.5
-DEKF -> P: 100, Rinit: 30, Rlast: 3, Qinit: 1e-2, Qlast: 1e-6, Bias: 1.5
-EKF ->  P: 100, Rinit: 30, Rlast: 3, Qinit: 1e-2, Qlast: 1e-6, Bias: 1.5
-Alg2 -> P: 0.5, Qinit: 1e-8, Qlast: 1e-8, Bias: 5, ChiMin: 1e-2
+Dataset: kin32fm, Hidden: 12 Backward: 10
+SGD -> LRate: 0.4, Bias: 0.5
+RMSprop -> LRate: 0.005, Bias: 0.5
+Adam ->  LRate: 0.003, Bias: 0.5
+DEKF -> P: 50, Rinit: 10, Rlast: 3, Qinit: 1e-4, Qlast: 1e-6, Bias: 0.5
+EKF ->  P: 50, Rinit: 10, Rlast: 3, Qinit: 1e-4, Qlast: 1e-6, Bias: 0.5
+Alg2 -> P: 0.5, Qinit: 1e-7, Qlast: 1e-8, Bias: 5, ChiMin: 1e-2
 
 
 *****
 Dataset: puma8nm, Hidden: 16, Backward: 10
 SGD -> LRate: 0.4, Bias: 0.5
 RMSprop -> LRate: 0.01, Bias: 0.5
-Adam ->  LRate: 0.009, Bias: 0.5
-DEKF -> P: 100, Rinit: 30, Rlast: 3, Qinit: 1e-2, Qlast: 1e-6, Bias: 0.5
-EKF ->  P: 100, Rinit: 30, Rlast: 3, Qinit: 1e-2, Qlast: 1e-6, Bias: 0.5
-Alg2 -> P: 10, Qinit: 1e-4, Qlast: 1e-8, Bias: 0.5, ChiMin: 1e-2
+Adam ->  LRate: 0.006, Bias: 0.5
+DEKF -> P: 100, Rinit: 10, Rlast: 3, Qinit: 1e-4, Qlast: 1e-6, Bias: 0.5
+EKF ->  P: 100, Rinit: 10, Rlast: 3, Qinit: 1e-4, Qlast: 1e-6, Bias: 0.5
+Alg2 -> P: 50, Qinit: 1e-4, Qlast: 1e-8, Bias: 0.5, ChiMin: 1e-2
 
 
 *****
 Dataset: puma8nh, Hidden: 16, Backward: 10
-SGD -> LRate: 0.25, Bias: 0.5
-RMSprop -> LRate: 0.006, Bias: 0.5
-Adam ->  LRate: 0.006, Bias: 0.5
-DEKF -> P: 100, Rinit: 20, Rlast: 3, Qinit: 1e-3, Qlast: 1e-6, Bias: 0.5
-EKF ->  P: 100, Rinit: 20, Rlast: 3, Qinit: 1e-3, Qlast: 1e-6, Bias: 0.5
-Alg2 -> P: 10, Qinit: 1e-4, Qlast: 1e-8, Bias: 0.5, ChiMin: 1e-2
+SGD -> LRate: 0.2, Bias: 0.5
+RMSprop -> LRate: 0.008, Bias: 0.5
+Adam ->  LRate: 0.004, Bias: 0.5
+DEKF -> P: 25, Rinit: 10, Rlast: 3, Qinit: 1e-4, Qlast: 1e-6, Bias: 0.5
+EKF ->  P: 25, Rinit: 10, Rlast: 3, Qinit: 1e-4, Qlast: 1e-6, Bias: 0.5
+Alg2 -> P: 10, Qinit: 1e-7, Qlast: 1e-8, Bias: 0.5, ChiMin: 1e-2
 
 *****
-Dataset: puma32fm, Hidden: 12 Backward: 20
+Dataset: puma32fm, Hidden: 12 Backward: 10
 SGD -> LRate: 0.35, Bias: 0.5
-RMSprop -> LRate: 0.004, Bias: 1.5
-Adam ->  LRate: 0.003, Bias: 1.5
-DEKF -> P: 100, Rinit: 20, Rlast: 3, Qinit: 1e-3, Qlast: 1e-6, Bias: 1.5
-EKF ->  P: 100, Rinit: 20, Rlast: 3, Qinit: 1e-3, Qlast: 1e-6, Bias: 1.5
-Alg2 -> P: 0.5, Qinit: 1e-8, Qlast: 1e-8, Bias: 5, ChiMin: 1e-2
+RMSprop -> LRate: 0.004, Bias: 0.5
+Adam ->  LRate: 0.003, Bias: 0.5
+DEKF -> P: 50, Rinit: 10, Rlast: 3, Qinit: 1e-4, Qlast: 1e-6, Bias: 0.5
+EKF ->  P: 50, Rinit: 10, Rlast: 3, Qinit: 1e-4, Qlast: 1e-6, Bias: 0.5
+Alg2 -> P: 0.5, Qinit: 1e-7, Qlast: 1e-8, Bias: 5, ChiMin: 1e-2
 
 
 BINARY ADDITION:
