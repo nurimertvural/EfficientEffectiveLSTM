@@ -173,7 +173,7 @@ classdef LSTM_IEKF < handle
             error_vec = zeros(obj.repeat, obj.Tx);
             kErr_vec  = zeros(obj.repeat, obj.Tx);
             time_vec  = zeros(1,obj.repeat);
-            
+            k = 50;
             
             obj.inst_num = ceil( log2( 1/ obj.chi_min) - 2);
 
@@ -192,10 +192,8 @@ classdef LSTM_IEKF < handle
 
                 if(obj.search_mode)
                     rng(r+30); 
-                    k=1;
                 else
                     rng(r);
-                    k = 50;
                 end
                 
                 Wox = repmat( obj.init*randn( obj.n_h , obj.n_h + obj.n_i ), 1, 1, obj.inst_num);
