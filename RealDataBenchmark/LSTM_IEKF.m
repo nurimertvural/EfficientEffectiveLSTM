@@ -52,6 +52,8 @@ classdef LSTM_IEKF < handle
        chi_min
        chi_vec
        
+       search_mode
+       
        weights
        
        
@@ -137,6 +139,7 @@ classdef LSTM_IEKF < handle
             p.addParameter('Init', 0.1, @(x) x>0);
             p.addParameter('Bias', 0.5, @(x) x>0);
             p.addParameter('Repeat', 1, @(x) x>0 & isscalar(x));
+            p.addParameter('Search', false, @(x) islogical(x));
             
             p.parse(input_set, target_set, varargin{:});
            
@@ -146,6 +149,7 @@ classdef LSTM_IEKF < handle
             obj.init   = p.Results.Init; 
             obj.bias   = p.Results.Bias; 
             obj.repeat = p.Results.Repeat;
+            obj.search_mode = p.Results.Search;
    
             obj.n_i  = size( input_set , 1 ); %All inputs are column vectors.
             obj.T    = size( input_set , 2 );
@@ -169,7 +173,7 @@ classdef LSTM_IEKF < handle
             error_vec = zeros(obj.repeat, obj.Tx);
             kErr_vec  = zeros(obj.repeat, obj.Tx);
             time_vec  = zeros(1,obj.repeat);
-            k = 50;
+            
             
             obj.inst_num = ceil( log2( 1/ obj.chi_min) - 2);
 
@@ -186,7 +190,14 @@ classdef LSTM_IEKF < handle
                 obj.weights = linspace( 1, 0.5, obj.inst_num);
                 obj.weights = obj.weights'/sum(obj.weights);
 
-                rng(r); 
+                if(obj.search_mode)
+                    rng(r+30); 
+                    k=1;
+                else
+                    rng(r);
+                    k = 50;
+                end
+                
                 Wox = repmat( obj.init*randn( obj.n_h , obj.n_h + obj.n_i ), 1, 1, obj.inst_num);
                 Wix = repmat( obj.init*randn( obj.n_h , obj.n_h + obj.n_i ), 1, 1, obj.inst_num);
                 Wfx = repmat( obj.init*randn( obj.n_h , obj.n_h + obj.n_i ), 1, 1, obj.inst_num);
@@ -200,7 +211,8 @@ classdef LSTM_IEKF < handle
                 obj.h_t_pre = zeros(obj.n_h, 1, obj.inst_num);
                 obj.c_t_pre = zeros(obj.n_h, 1, obj.inst_num);
 
-                tic
+                
+                total_time = 0;
                 
                 for t=1:obj.Tx
 
@@ -227,6 +239,8 @@ classdef LSTM_IEKF < handle
                     kErr_vec(r, t) = kErr;
                     
                     % Choose input batch/target value.
+                    tic
+                    
                     end_idx = t + obj.batch_size-1;
                     input_batch = obj.input_set(:,t:end_idx,:);
                     
@@ -243,23 +257,26 @@ classdef LSTM_IEKF < handle
                     
                     
                     error_vec(r, t) = (obj.d_t - obj.d_hat_t)^2;
+                    
+                    total_time = total_time + toc;
 
 
                 end
                 
-                time_vec(r) = toc;
+                time_vec(r) = total_time;
             end
             
-            mean_perf =   ( mean(prctile(error_vec,5))  + mean(prctile(error_vec,95))  ) / (2*var(obj.target_set));
-            var_perf  =   ( mean(prctile(error_vec,95)) - mean(prctile(error_vec,5))   ) / (2*var(obj.target_set));
-            k_mean_perf = ( mean(prctile(kErr_vec,5))   + mean(prctile(kErr_vec,95)) ) / (2*var(obj.target_set));
-            k_var_perf  = ( mean(prctile(kErr_vec,95))  - mean( prctile(kErr_vec,5)) ) / (2*var(obj.target_set));
+            MSE  = mean(mean(error_vec, 1))     / var(obj.target_set);
+            MS   = mean(std(error_vec, 0, 1))   / var(obj.target_set);
+            
+            kMSE = mean( mean(kErr_vec, 1) )    / var(obj.target_set);
+            kMS  = mean( std(kErr_vec, 0, 1) )  / var(obj.target_set);
 
-            fprintf('-LSTM_');
+            fprintf(' -LSTM_');
             fprintf(obj.optimizer_name);
             fprintf('\n');
            
-            fprintf('MSE: %.3f \x00B1  %.3f -- kMSE: %.3f \x00B1  %.3f, \n', mean_perf, var_perf, k_mean_perf, k_var_perf);
+            fprintf('MSE: %.4f, SE: %.3f, kMSE: %.4f, kSE: %.3f -- ', MSE, MS, kMSE, kMS );
             fprintf('Run Time: %.2f! \n', mean(time_vec));
 
        end
